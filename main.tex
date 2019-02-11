@@ -112,7 +112,7 @@
 %%%%% title page data %%%%%
 
 %\title{\bf Inferring radiocarbon values in carbon cycle models from their numerical output}
-\title{\bf Model reconstruction and computation of radiocarbon from the numerical output of Earth system models}
+\title{\bf Model reconstruction and computation of radiocarbon from the numerical output of land carbon models}
 \author[1]{Holger Metzler}
 \author[2]{William Riley}
 \author[2]{Qing Zhu}
@@ -164,9 +164,9 @@ We demonstrate the approach for the soil component of ELMv1-ECA, a vertically re
 %\item Introduce aims of the paper and organization
 %\end{itemize}
 
-Soil is an important global C reservoir, but there are still large uncertainties in the controls on soil C cycling, and its representation in models \citep{Luo2016}. The dynamics of radiocarbon in terrestrial ecosystems can be used to interpret the rates at which carbon is exchanged with the atmosphere and moves through vegetation and soils. As a result, radiocarbon has been used in many empirical studies to evaluate rates of soil C cycling. However, it has only more recently been used as a tool for model intercomparison \citep{He2016}. 
+Terrestrial ecosystems, and soils in particular, are an important global C reservoir but with large uncertainties in the controls on soil C cycling, and its representation in models \citep{Luo2016}. The dynamics of radiocarbon in terrestrial ecosystems can be used to interpret the rates at which carbon is exchanged with the atmosphere and moves through vegetation and soils. As a result, radiocarbon has been used in many empirical studies to evaluate rates of soil C cycling. However, it has only more recently been used as a tool for model intercomparison \citep{He2016}. 
 
-Measurements of radiocarbon offer great potential to constrain temporal dynamics of ecosystem models and assess their performance. However, to date, such comparisons have been limited to a small number of models which simulate C isotopes \citep{Koven2013, Tifafi2018}, as the majority of models do not explicitly represent isotope dynamics. The current coupled climate-carbon cycle model intercomparison project (C4MIP) of the 6th phase coupled model intercomparison project (CMIP6), requests model participants to explicitly model radiocarbon and include the corresponding output from the major land and ocean model compartments \citep{Jones2016}. However to date, many models do not represent radiocarbon, as it can be time-consuming to implement, and computationally-intensive to run. Thus, the goal of this work is to develop a tool to make radiocarbon-based comparisons of C cycling comparable across a wider suite of models.
+Measurements of radiocarbon offer great potential to constrain temporal dynamics of ecosystem models and assess their performance. However, to date, such comparisons have been limited to a small number of models which simulate C isotopes \citep[e.g.][]{Koven2013, Tifafi2018}, as the majority of models do not explicitly represent isotope dynamics. The current coupled climate-carbon cycle model intercomparison project (C4MIP) of the 6th phase coupled model intercomparison project (CMIP6), requests model participants to explicitly model radiocarbon and include the corresponding output from the major land and ocean model compartments \citep{Jones2016}. However to date, many models do not represent radiocarbon, as it can be time-consuming to implement, and computationally-intensive to run. Thus, the goal of this work is to develop a tool to make radiocarbon-based comparisons of C cycling comparable across a wider suite of models.
 
 The availability of radiocarbon output from a range of models would allow not only an additional data constraint against global datasets \citep{He2016, Mathieu2015}, it may also offer a new tool for differentiating patterns of C cycling across different model structures \citep{Sierra2014}. 
 %There are two broad classes of models currently being applied for studies of the global carbon cycle: (1) pseudo-first order representations, based on concepts first described for Century (Parton et al. 1996) and RoTHC (cite) and (2) microbe and mineral-surface explicity models (eg Ahrens et al. 20XX, Dwivedi et al. 2017; Riley et al. 2014; Sulman et al 2018) that attempt to more explicitly represent the underlying mechanisms responsible for soil carbon transformations. 
@@ -178,7 +178,7 @@ Linear response theory suggests that the impulse response function of a particul
 
 \citet{Metzler2018PNAS} recently developed a method to obtain a mathematical object, the state transition matrix (see details below), that generalizes response function theory for nonlinear models out of equilibrium. This approach removes previous assumptions that prevented the use of the linear response approach for the computation of isotope and tracer dynamics a posteriori from simulations. Therefore, it offers an opportunity to compute isotope dynamics from models that do not explicitly represent it, and could be applied to models from CMIP6. Since output from these MIPs is presented in discrete time steps, it is still a challenge to translate the state transition matrix approach from the continuous to the discrete case.
 
-We present an approach to compute radiocarbon values for models which do not explicitly represent it. To do this, we extend the approach presented in \citet{Metzler2018PNAS} for the computation of the state transition matrix in continuous time to the discrete time case, and apply it to reconstruct tracer and isotope dynamics from model output. We first give a mathematical overview of the approach and then present examples of its use. We test our approach by comparing our computed values to output from the ELMv1-ECA model, an Earth system model that explicitly represents radiocarbon. We successfully match the modeled radiocarbon values along the entire vertically resolved soil profile, across soil and litter pools over time. This is a valuable new framework with large potential for application to the CMIP archives and to models with more diverse structures. 
+We present an approach to compute radiocarbon values for models which do not explicitly represent it. To this end, we extend the approach presented in \citet{Metzler2018PNAS} for the computation of the state transition matrix in continuous time to the discrete time case, and apply it to reconstruct tracer and isotope dynamics from model output. We first give a mathematical overview of the approach and then present examples of its use. We test our approach by comparing our computed values to output from the ELMv1-ECA model, an Earth system model that explicitly represents radiocarbon. We successfully match the modeled radiocarbon values along the entire vertically resolved soil profile, across soil and litter pools over time. This is a valuable new framework with large potential for application to the CMIP archives and to models with more diverse structures. 
 
 \section{Methods}
 \subsection{Carbon cycle models as compartmental systems}
@@ -222,7 +222,7 @@ Here, $\vec{C}(t)$ is the vector of compartment contents at time $t$, $\tens{B}$
     
     The unique semi-analytical solution of linear compartmental system \eqref{eqn:CS_td_lin} is given by \citep{Brockett2015}
     \begin{equation*}
-        \vec{C}(t) = \tens{\Phi}(t,t_0)\,\vec{C}^0 + \intl_0^t \tens{\Phi}(t,\tau)\,\vec{u}(\tau)\dd{\tau}.
+        \vec{C}(t) = \tens{\Phi}(t,t_0)\,\vec{C}^0 + \intl_{t_0}^t \tens{\Phi}(t,\tau)\,\vec{u}(\tau)\dd{\tau}.
     \end{equation*}
     We call the solution semi-analytic because the system's state transition matrix $\tens{\Phi}$ is only implicitly given as the unique solution of the matrix initial value problem
     \begin{equation*}
@@ -250,11 +250,11 @@ Here, $\vec{C}(t)$ is the vector of compartment contents at time $t$, $\tens{B}$
 
 
 %\section{Approach to reconstruct a carbon cycle model from data}
-\subsection{Reconstruction of a continuous-time model from discrete-time model output}
+\subsection{Reconstruction of a continuous-time system from discrete-time model output}
 The approach presented above works only when we have the original model completely described by a system of ODEs, which by definition implies that the system is continuos in time. However, we are interested in using the approach for ESMs for which we only have access to model output reported in discrete time steps. Therefore, it is necessary to reconstruct a continuous-time model from this model output. 
     
     \subsubsection*{One-dimensional case}
-        Suppose we are given a one-dimensional 
+        Suppose we are given a one-dimensional (one compartment)
         %\todo{1D usually refers to space. I guess you mean only time-dependent? Is this still one compartment? Is that what you mean by 1D?} \todo[color=green!40]{the dimension is supposed to refer to the space} 
         time-dependent linear compartmental system
         \begin{equation}\label{eqn:CS_one_dim}
@@ -280,8 +280,8 @@ The approach presented above works only when we have the original model complete
                 \widehat{C}(t_k) &= \widehat{C}^k.
             \end{aligned}
         \end{equation}
-        Suppose that at time step $k$ the value $\widehat{C}^k$ is already known from the previous time step.
-        This is no restriction, because for $k=0$ we set $\widehat{C}^0=C^0$.
+        Suppose that at time step $k$ the value $\widehat{C}^k$ is already known from the previous time step,
+        and for $k=0$ we set $\widehat{C}^0=C^0$.
         
         We write $\Delta_k=t_{k+1}-t_k$ and choose $\widehat{u}^k=u^k/\Delta_k$.
         Consequently, for the time interval $I_k$ the cumulative external system input $u^k$ of the unknown system \eqref{eqn:CS_one_dim} and the cumulative external system input $\Delta_k\,\widehat{u}^k$ of the approximating system \eqref{eqn:CS_one_dim_approx} coincide.
@@ -459,25 +459,26 @@ The approach presented above works only when we have the original model complete
 %\begin{itemize}
 %    \item describe ELMv1-ECA (Zhu et al. in revision), including soil and plant CNP model, allocation, and competition. Describe soil CNP pool structure (Koven et al)
     
-    The recent development of ELMv1-ECA \citep{Zhu2019} is based on CLM4.5BGC \citep{Koven2013}, which represents vertically-resolved soil C and N dynamics based on the Century model \citep{Parton1993} with enhancements  to include soil O$_2$ effects. ELMv1-ECA added several features that affect C inputs to soil and SOC dynamics. Briefly, the changes relevant to the current study include: (a) phosphorus limitation on soil organic carbon decomposition \citep{zhu2016bg}; (b) use an Equilibrium Chemistry Approximation of multiple-consumer-multiple-resource competition network to resolve microbial immoblization of soil available nutrients \citep{Tang2013, Zhu2017ea} ; (c) dynamic plant stoichiometry that affect litter nutrient content and decompobility. ELMv1-ECA has been evaluated against multiple global-scale observations of ecosystem C, water, and energy stocks and fluxes using ILAMB \citep{Collier2018, Zhu2019} and short-term nutrient cycling observations and global-scale partitioning of N losses \citep{Zhu2015ncc, Riley2018}. Overall, model benchmarking shows improvement from the precursor CLM4.5 predictions, and in particular for this study, more accurate estimates of spatially-distributed soil C stocks \citep{Zhu2019}.
+    The recent development of ELMv1-ECA \citep{Zhu2019} is based on CLM4.5BGC \citep{Koven2013}, which represents vertically-resolved soil C and N dynamics based on the Century model \citep{Parton1993} with enhancements  to include soil O$_2$ effects. ELMv1-ECA added several features that affect C inputs to soil and SOC dynamics. \todo{Add one or two sentences on the representation of radiocarbon in the model} Briefly, the changes relevant to the current study include: (a) phosphorus limitation on soil organic carbon decomposition \citep{zhu2016bg}; (b) use an Equilibrium Chemistry Approximation of multiple-consumer-multiple-resource competition network to resolve microbial immoblization of soil available nutrients \citep{Tang2013, Zhu2017ea} ; (c) dynamic plant stoichiometry that affect litter nutrient content and decompobility. ELMv1-ECA has been evaluated against multiple global-scale observations of ecosystem C, water, and energy stocks and fluxes using ILAMB \citep{Collier2018, Zhu2019} and short-term nutrient cycling observations and global-scale partitioning of N losses \citep{Zhu2015ncc, Riley2018}. Overall, model benchmarking shows improvement from the precursor CLM4.5 predictions, and in particular for this study, more accurate estimates of spatially-distributed soil C stocks \citep{Zhu2019}.
     
  %   \item Present the simulation protocol (spinup, forcing, site characteristics) and how 14C is calculated.
+  In this study, we present simulation results for three particular sites with contrasting dynamics: Barrow (coordinates), Harvard Forest (coordinates), and Manaus (coordinates). \todo{Add a brief ecological description of the sites}
     
-    Characteristics for the three sites (Barrow, Harvard Forest, and Manaus) were extracted from the standard global model datasets, which are used to set plant functional types, soil properties, etc. The simulation protocol for all three sites follows the standard approach described in \citet{Oleson2010}. The model is first spun up (i.e., brought close to equilibrium) using an accelerated soil decomposition approach \citep{Koven2013} for 1000 years, followed by a 400 year regular spin up with regular soil decomposition. Soil phosphorus pools were initialized from observations \citep{Yang2013} at the beginning of the regular spinup. The spinup simulations were forced with repeated meteorology (GSWP reanalysis \citep{Dirmeyer2006} year 1901 to 1920) and constant atmospheric CO$_2$ mole fraction (285 ppm). We evaluate the spun-up model's soil carbon stock to ensure changes at the end of the spin up are less than 0.01 percent/year. After spinup, the model was run in a transient simulation from 1850 to 2010 with GSWP reanalysis forcing \citep{Dirmeyer2006}, transient CO$_2$ concentrations, N deposition \citep{Lamarque2005}, and P deposition \citep{Mahowald2008}. Atmospheric \begin{math}  \Delta{C} \end{math} is prescribed with zero values during spinup simulations and with observed values including bomb spike during transient simulation \citep{Levin2010}.
+    Characteristics for the three sites (Barrow, Harvard Forest, and Manaus) were extracted from the standard global model datasets, which are used to set plant functional types, soil properties, etc. The simulation protocol for all three sites follows the standard approach described in \citet{Oleson2010}. The model is first spun up (i.e., brought close to equilibrium) using an accelerated soil decomposition approach \citep{Koven2013} for 1000 years, followed by a 400 year regular spin up with regular soil decomposition. Soil phosphorus pools were initialized from observations \citep{Yang2013} at the beginning of the regular spinup. The spinup simulations were forced with repeated meteorology (GSWP reanalysis \citep{Dirmeyer2006} year 1901 to 1920) and constant atmospheric CO$_2$ mole fraction (285 ppm). We evaluate the spun-up model's soil carbon stock to ensure changes at the end of the spin up are less than 0.01 percent/year. After spinup, the model was run in a transient simulation from 1850 to 2010 with GSWP reanalysis forcing \citep{Dirmeyer2006}, transient CO$_2$ concentrations, N deposition \citep{Lamarque2005}, and P deposition \citep{Mahowald2008}. Atmospheric   $\Delta^{14}$C  is prescribed with zero values during spinup simulations and with observed values including bomb spike during transient simulation \citep{Levin2010}.
     
     
  %   \item Show different ways to aggregate the model output, e.g. weighted radiocarbon values for single pools across depth layers or all pools for each layer
     
-    We performed analyses using several approaches to reconstruct ELMv1-ECA from model output. First, to characterize the effect of temporal discretization, we applied the approach using ELMv1-ECA output averaged over 1, and 10 day time steps 
+    We performed analyses using several approaches to reconstruct ELMv1-ECA from model output. First, to characterize the effect of temporal discretization, we applied the approach using ELMv1-ECA output averaged over 1, and 10 day time steps. 
     %\red{we did not do 30d, it might even end up quite complicated to do}. 
     This analysis will inform required output frequency for other models to apply model reconstruction. We also tested the effects of consolidating all soil C pool states and fluxes at each depth layer on the predicted $\Delta^{14}$C values of the total soil C stock. 
     %\item \gray{Show predictions of pool age, system age, and transit time predicted by our approach}
 %\end{itemize}    
 
 \section{Results}
-\subsection{1D compartmental system example}
+\subsection{One compartment example}
 %\textbf{Example.}
-Consider the one-dimensional compartmental system
+Consider the one-dimensional compartmental system with time-dependent inputs
 \begin{equation}\label{eqn:CS_one_dim_example}
     \begin{aligned}
         \deriv{t}\,C(t) &= -0.04\,C(t) + \left[3+\sin(t/20)\right],\quad t>1909,\\
@@ -495,8 +496,8 @@ Figure \ref{fig:CS_one_dim_example} depicts the quality of approximation with re
     \label{fig:CS_one_dim_example}
 \end{figure}        
 
-\textbf{Example.}
-Consider the one-dimensional compartmental system
+If we remove the time-dependency from the input part, the system becomes
+%Consider the one-dimensional compartmental system
 \begin{equation}\label{eqn:CS_one_dim_example_auton}
     \begin{aligned}
         \deriv{t}\,C(t) &= -0.04\,C(t) + 3,\quad t>1909,\\
