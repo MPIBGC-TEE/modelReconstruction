@@ -110,7 +110,7 @@
 %%%%% title page data %%%%%
 
 %\title{\bf Inferring radiocarbon values in carbon cycle models from their numerical output}
-\title{\bf Model reconstruction and computation of radiocarbon from the numerical output of land carbon models}
+\title{\bf Model reconstruction and computation of soil radiocarbon from the numerical output of land carbon models}
 \author[1]{Holger Metzler}
 \author[2]{William Riley}
 \author[2]{Qing Zhu}
@@ -546,6 +546,16 @@ Figures:
 %- vertical structure (Figure depth_profile_10.pdf; 1 d looks the same)
 %- lumping SOC pools by layer, and lumping those lumped SOC by depth interval (e.g., 0-30 cm): this approach doesn't work (i.e., lumping fluxes into a layer, with a lumped single pool in each layer). The lumped single pool cannot represent the internal dynamics.
 
+--Method works. Can reproduce ELM depth and time resolved model output. 
+
+
+--Successfully represents radiocarbon trends with depth, and captures the dynamics of the bomb curve
+Error for litter pool is substantially higher than for CWD and soil.
+
+
+--Error rates for 1-day are X. Error rates increase by around an order of magnitude to Y for 10-day, but are still well within the model uncertainty. Even at 10-day, error for soil (X) is still negligible.
+
+
 \section{Discussion}
 
 \subsection{Performance and future application }
@@ -554,7 +564,7 @@ This approach can be applied to both single-depth and vertically-resolved models
 This approach can be used across a range of models, as it does not require models to implement additional isotope dynamics or tracers, but simply to output existing stocks and fluxes of total C. For maximum accuracy, all model stocks and fluxes are required (e.g. all individual transfers between all pools). \todo[color=green!40]{not so sure}However, the approach can also be applied to aggregated C stocks (eg total soil C instead of individual pools). This reduces the accuracy of the model representation, but a test with ESM showed.... We did this and found XX increased error...that is still within the range of value given the uncertainties inherent to Earth system models...
 
 \red{Make sure to cover: (1) what is required to make the approach work (fluxes and states that affect 12C); application to existing models; (2) application to single- and multi-layer models; (3) does the approach work for total C in each layer (i.e., if you aggregate all C pools in each layer). We could aggregate all fluxes in and all fluxes out of a soil layer}
-
+To test whether aggregating 
 \subsection{Potential for data-model comparison}
 
 The potential of this approach to add radiocarbon output across a range of models will allow valuable data-model comparisons. This work will enable much more widespread use of radiocarbon as an additional model constraint, particularly in soils. It provides a framework for model intercomparison and will enable the future use of radiocarbon datasets to benchmark and calibrate earth system models.
