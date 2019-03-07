@@ -538,15 +538,13 @@ Figure \ref{fig:CS_one_dim_example_auton} shows that the approximation is perfec
     \end{figure}        
 
 \subsection{ELM Results}
-Figures:
 
 \begin{figure}[htbp]
         \centering 
         \includegraphics[width=1.0\linewidth]{figs/depth_profile_10.pdf}
-        \caption{C stocks over time.
-            Test test test 
+        \caption{Radiocarbon values with depth. Sites (left to right): Barrow, Harvard, Manaus. Radiocarbon values decrease with depth, and shift over time in response to changes in atmospheric concentrations. Computed values and ELMv1-ECA output are both shown. Differences are imperceptible due to very small errors.
             }
-        \label{fig:test}
+        \label{fig:depthProfiles}
     \end{figure}      
 
 %- demonstration of approach working for different time steps (1 vs 10 d) for ${}^{12}$C (Figure C12_through_time_rel_error_01, *_10.pdf)
@@ -555,14 +553,37 @@ Figures:
 %- vertical structure (Figure depth_profile_10.pdf; 1 d looks the same)
 %- lumping SOC pools by layer, and lumping those lumped SOC by depth interval (e.g., 0-30 cm): this approach doesn't work (i.e., lumping fluxes into a layer, with a lumped single pool in each layer). The lumped single pool cannot represent the internal dynamics.
 
---Method works. Can reproduce ELM depth and time resolved model output. 
 
 
---Successfully represents radiocarbon trends with depth, and captures the dynamics of the bomb curve
-Error for litter pool is substantially higher than for CWD and soil.
+Our computed radiocarbon values successfully reproduce the ELMv1-ECA model output. We match model radiocarbon values from all seven pools and ten vertical layers over time. For Barrow, Harvard, and Manaus, the mean absolute error is $<$ .001\% for both carbon stocks and radiocarbon values across all soils. These extremely low error rates are well within model uncertainty and far less than the spatial heterogeneity of soil carbon stocks and radiocarbon values in the field. 
 
+Computed radiocarbon values agree closely with the model output throughout the soil profile, and capture large changes in the radiocarbon values with depth. Figure \ref{fig:depthProfiles} shows the computed radiocarbon values and model output. Due to the very small relative error, the difference between the lines is imperceptible (Fig. \ref{fig:depthProfiles}). 
 
---Error rates for 1-day are X. Error rates increase by around an order of magnitude to Y for 10-day, but are still well within the model uncertainty. Even at 10-day, error for soil (X) is still negligible.
+We also reproduce the changes in radiocarbon values of all seven pools (coarse woody debris, three litter pools, and three soil pools) over time (Fig. \ref{fig:poolsOverTime}). In the 1960s, the radiocarbon concentration in the atmosphere increased sharply due to weapons testing. The CWD, litter and first soil pool all show a large response to this change, as atmospheric C is rapidly cycled through these pools. The incorporation of bomb carbon in the soil is also evident in the shallow depth profiles, which shift in value over time. In contrast, the slower soil pools show a more lagged and damped response to the atmospheric perturbation. In all pools, and throughout the time series, the computed radiocarbon values match those from ELMv1-ECA.
+
+\begin{figure}[htbp]
+        \centering 
+        \vspace{-8em}
+        \includegraphics[width=1.0\linewidth]{figs/Delta_14C_through_time_per_pools_10.pdf}
+        \vspace{-4em}
+        \caption{Radiocarbon values in all pools through time. Sites (top to bottom): Barrow, Harvard, Manaus. Atmospheric radiocarbon values (blue) increase in response to bomb testing in the 1960s. Fast cycling pools increase in response to the atmosphere. Slower cycling pools show a lagged and damped response. Differences in computed values and model output are imperceptible due to low relative errors.
+            }
+        \label{fig:poolsOverTime}
+    \end{figure}    
+    
+    % Is this figure showing both the computed values and the ELM values on top of each other? Or only the computed values. It is unclear from the legend ...although we know they would look the same, this should be clarified in the legend
+
+Although the error rates are extremely low across all pools over time, they vary systematically. The absolute percent error is larger for the CWD and litter pools than for the soil pools, and peaks during the bomb period (Fig \ref{fig:10dayErrorOverTime}). The mean absolute percent error for computed $^{14}$C values are in most cases at least two orders of magnitude larger than those for $^{12}$C across sites and pools. The error also increases for larger time steps. From the 1-day time step to the 10-day time step, the absolute percent error for computed radiocarbon values increases by an order of magnitude for CWD and litter pools. However despite this, at the 10-day time step, the mean absolute percent error for this method remains low: it is $< 1 \times 10^{-5}$ $\%$ for $^{12}$C in all pools and sites, and $<$ 0.001 \% for $^{14}$C in all pools and sites, remaining well within the bounds of model uncertainty and environmental heterogeneity in soils.
+
+\begin{figure}[htbp]
+        \centering 
+        \vspace{-8em}
+        \includegraphics[width=1.0\linewidth]{figs/C14_through_time_rel_err_10.pdf}
+        \vspace{-4em}
+        \caption{Relative error in radiocarbon values for CWD, litter and soil pools over time. Sites (top to bottom): Barrow, Harvard, Manaus. $^{14}$C percent error is approximately two orders of magnitude larger than $^{12}$C error. 
+            }
+        \label{fig:10dayErrorOverTime}
+    \end{figure}    
 
 
 \section{Discussion}
