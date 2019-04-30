@@ -340,7 +340,7 @@ The approach presented above works only when we have the original model complete
     
     Model output is usually provided at discrete points $t_0<t_1<\cdots<t_n$ in time, either because there is no feasible way to represent continuous-time model output or the model itself works on the basis of discrete time steps.
     In either case, if we reconstruct the unknown original model in terms of a CTA \eqref{eqn:CS_multi_dim_approx}, we interpolate the given data for points in time that lie between $t_k$ and $t_{k+1}$.
-    This interpolation can of course be done in many different and arbitrary ways.
+    This interpolation can of course be done in many different and arbitrary ways, and it can also massively go wrong (\red{new figure that shows how an oscillating model can lead to totally misleading interpolations: create data from nonlinear oscillating model and show reconstruction based on different step sizes}).
     We can eliminate this arbitrariness by sticking to the exact data that are given.
     Consequently, we reconstruct the unknown model in a discrete time setting, on the time grid $t_0<t_1<\cdots<t_n$ that is predetermined by the given data and make no guesses for any other point in time.
     This leads to a reconstructed model which is represented by a $d$-compartment discrete-time system of the form
@@ -401,7 +401,8 @@ The approach presented above works only when we have the original model complete
     \end{equation*}
     We define $\widehat{\vec{C}}(k+1)=\widehat{\tens{B}}(k)\,\widehat{\vec{C}}(k)+\widehat{\vec{u}}(k)$ and continue with the step $k+1$.
     
-    For cases where the full model output temporal resolution is too coarse (i.e., it leads to negative pool sizes during reconstruction), a discrete-time approximation (DTA) is required. We propose two approaches:
+    For cases where the full model output temporal resolution is too coarse (i.e., it leads to negative pool sizes during reconstruction), a Discrete-Time Approximation (DTA) is required. We propose two approaches:
+    \red{actually, we should ask for not following any approach here. As the oscillation example shows (or will show), the interpolation can be way off without us knowing about it.}
     
 %    create a discrete-time approximation of the underlying model for arbitrary temporal resolution model output, we have two possibilities:
     
@@ -436,7 +437,7 @@ For all reconstructions of the ELMv1-ECA soil carbon and radiocarbon profiles be
 %\end{itemize}    
 
 \section{Results}
-We first give two examples with simplified systems (i.e., one- and two-compartment systems) to demonstrate characteristics of the CTA, and then present comparisons using DTA to the full ELMv1-ECA predictions. \red{Holger: please check the use of "CTA" and "DTA" in the Results section. I don't think everything is labelled correctly.}
+We first give two examples with simplified systems (i.e., one- and two-compartment systems) to demonstrate characteristics of the Continuous-Time Approximation (CTA), and then present comparisons using Discrete-Time Approximation (DTA) to the full ELMv1-ECA predictions. \red{Holger: please check the use of "CTA" and "DTA" in the Results section. I don't think everything is labelled correctly.}
 \subsection{One compartment example}
 %\textbf{Example.}
 Consider the one compartment system with time-dependent inputs running from year 1909
@@ -463,6 +464,7 @@ Consider the one compartment system with time-dependent inputs running from year
 \end{figure}        
 
 If we remove the time-dependency from the input boundary condition, the system becomes
+\red{as mentioned before, this part should be removed}
 %Consider the one-dimensional compartmental system
 \begin{equation}\label{eqn:CS_one_dim_example_auton}
     \begin{aligned}
@@ -471,6 +473,7 @@ If we remove the time-dependency from the input boundary condition, the system b
     \end{aligned}
 \end{equation}
 The CTA approach exactly matches the system analytical solution for this case with constant boundary conditions for $n=3,6$ (Figure \ref{fig:CS_one_dim_example_auton}).
+\red{We should remove this example, since it is misleading, as the oscillatory example shows (or will show).}
 
 \begin{figure}[htbp]
     \centering 
@@ -483,7 +486,7 @@ The CTA approach exactly matches the system analytical solution for this case wi
 \end{figure}        
 
 \subsection{Multi-compartment test}
-    As a preliminary test before demonstrating the CTA for the full ELMv1-ECA model reconstruction, we evaluated the approach for several configurations of multiple C pools and nonlinear time dependencies. We found that the accuracy of the CTA approach does not depend on the number of pools or the nonlinear time dependencies. The time step required for accurate reconstruction depends on the frequency of the forcing and non-linear interactions between pools. For example, consider the two compartment system, initialized at year $t=1909$, and propagated for 110 years:
+    As a preliminary test before demonstrating the CTA for the full ELMv1-ECA model reconstruction, we evaluated the approach for several configurations of multiple C pools and nonlinear time dependencies. We found that the accuracy of the CTA approach does not depend on the number of pools or the nonlinear time dependencies. The time step required for accurate reconstruction depends on the frequency of the forcing and non-linear interactions among pools. For example, consider the two compartment system, initialized at year $t=1909$, and propagated for 110 years:
     \begin{equation}\label{eqn:CS_two_dim_example}
         \begingroup\makeatletter\def\f@size{10}\check@mathfonts
         \begin{aligned}
@@ -510,13 +513,14 @@ The CTA approach exactly matches the system analytical solution for this case wi
     \end{figure}        
 
 \subsection{ELMv1-ECA approximation}
-\red{Holger: we should explain the CTA versus DTA results: why it's slower, just as accurate, etc. Ie, why would we not just use the CTA?}
+\red{Holger: we should explain the CTA versus DTA results: why it's slower, just as accurate, etc. Ie, why would we not just use the CTA? Answer: The DTA approach is simply more honest because it does not interpolate and cannot have the problem that occurst for CTA in the oscillatory case.}
 
 \begin{figure}[htbp]
         \centering 
         \includegraphics[width=1.0\linewidth]{figs/depth_profile_10.pdf}
-        \caption{CTA and ELMv1-ECA modeled $\Delta^{14}$C values with depth in 1900, 1970, and 2010. The CTA bias is less than X\%. Sites (left to right): Boreal, Temperate, Tropical. $\Delta^{14}$C values decrease with depth, and become more enriched following the atmospheric bomb. \red{use ELMv1-ECA in legend for consistency. Increase all font sizes by at least a factor of 2. Put site names in lower right of each panel}}
+        \caption{DTA and ELMv1-ECA modeled $\Delta^{14}$C values with depth in 1900, 1970, and 2010. The DTA bias is less than \red{X\%}. Sites (left to right): Boreal, Temperate, Tropical. $\Delta^{14}$C values decrease with depth, and become more enriched following the atmospheric bomb.
         \label{fig:depthProfiles}
+        }
 \end{figure}      
              
 
@@ -526,33 +530,33 @@ The CTA approach exactly matches the system analytical solution for this case wi
 %- vertical structure (Figure depth_profile_10.pdf; 1 d looks the same)
 %- lumping SOC pools by layer, and lumping those lumped SOC by depth interval (e.g., 0-30 cm): this approach doesn't work (i.e., lumping fluxes into a layer, with a lumped single pool in each layer). The lumped single pool cannot represent the internal dynamics.
 
-Using 1-day ELMv1-ECA model output of \^{12}C inputs and fluxes between soil pools and atmospheric $\Delta^{14}$C, CTAs of bulk soil $\Delta^{14}$C values accurately reproduced the ELMv1-ECA values for the three sites and for all soil depths (Figure \ref{fig:depthProfiles}). The ELMV1-ECA modeled and CTA $\Delta^{14}$C values are imperceptibly different across depth for all three sites, with a mean absolute bias of \red{X\%}. 
+Using 1-day ELMv1-ECA model output of $^{12}$C inputs and fluxes between soil pools and atmospheric $\Delta^{14}$C, DTAs of bulk soil $\Delta^{14}$C values accurately reproduced the ELMv1-ECA values for the three sites and for all soil depths (Figure \ref{fig:depthProfiles}). The ELMV1-ECA modeled and DTA $\Delta^{14}$C values are imperceptibly different across depth for all three sites, with a mean absolute bias of \red{X\%}. 
 
-The bulk soil $\Delta^{14}$C values shown in Figure \ref{fig:depthProfiles} are combined from seven SOM component pools (coarse woody debris, three litter pools, and three soil pools), which we separately reproduce with the CTA. The CTA accurately reproduced ELMv1-ECA modeled $\Delta^{14}$C values for all these pools over the 110 y simulation (Fig. \ref{fig:poolsOverTime}). For all sites, the mean absolute error is $<0.001$\% for carbon stocks and $\Delta^{14}$C values across all sites and depths. These extremely low errors are well within model uncertainty and far less than the observed spatial heterogeneity of soil carbon stocks and radiocarbon values. 
+The bulk soil $\Delta^{14}$C values shown in Figure \ref{fig:depthProfiles} are combined from seven SOM component pools (Coarse Woody Debris (CWD); metabolic, cellulose, and lignin litter pools; fast, median, and passive soil pools), which we separately reproduce with the DTA. The CTA accurately reproduced ELMv1-ECA modeled $\Delta^{14}$C values for all these pools over the 110 y simulation from 1901 to 2010 (Fig. \ref{fig:poolsOverTime}). For all sites, the mean absolute error is $<0.001$\% \red{to be checked for new data} for carbon stocks and $\Delta^{14}$C values across all sites and depths. These extremely low errors are well within model uncertainty and far less than the observed spatial heterogeneity of soil carbon stocks and radiocarbon values. 
 
-In the 1960s, the radiocarbon concentration in the atmosphere increased sharply due to nuclear weapons testing (aka the bomb spike). The CWD, litter, and soil\_1 pools respond relatively rapidly to this change, as atmospheric C is rapidly cycled through these pools. This bomb carbon incorporation into bulk soil is also evident in the top meter of soil (Figure \ref{fig:depthProfiles}). In contrast, the slower soil pools (SOIL\_2, SOIL\_3) have a more lagged and damped response to the atmospheric bomb radiocarbon perturbation.
+In the 1960s, the radiocarbon concentration in the atmosphere increased sharply due to nuclear weapons testing (aka the bomb spike). The CWD, litter, and fast soil pools respond relatively rapidly to this change, as atmospheric C is rapidly cycled through these pools. This bomb carbon incorporation into bulk soil is also evident in the top meter of soil (Figure \ref{fig:depthProfiles}). In contrast, the slower soil pools (median and passive soil pools) have a more lagged and damped response to the atmospheric bomb radiocarbon perturbation.
 
 \begin{figure}[htbp]
         \centering 
         \vspace{-8em}
         \includegraphics[width=1.0\linewidth]{figs/Delta_14C_through_time_per_pools_10.pdf}
         \vspace{-4em}
-        \caption{$\Delta^{14}$C values in all pools through time (Lines: ELMv1-ECA; dots: CTA). Sites (top to bottom): Boreal, Temperate, Tropical. Atmospheric $\Delta^{14}$C values (blue) increase in response to bomb testing in the 1960s. Fast cycling pools increase most rapidly to the atmospheric $\Delta^{14}$C changes. Slower cycling pools show a lagged and damped response. Differences in CTA and ELMv1-ECA modeled values are imperceptible in this figure.
-        \red{put site names inside axis box, increase font by two times for all text in ALL figures. Use permil symbol (or $^o/_{oo}$) on y-axes.}}
+        \caption{$\Delta^{14}$C values in all pools through time (Lines: ELMv1-ECA; dots: DTA). Sites (top to bottom): Boreal, Temperate, Tropical forest. LITTER 1,2,3 denote metabolic, cellulose, and lignin litters. SOIL 1,2,3 are fast, median, and passive soil pools. Atmospheric $\Delta^{14}$C values (blue) increase in response to bomb testing in the 1960s. Fast cycling pools increase most rapidly to the atmospheric $\Delta^{14}$C changes. Slower cycling pools show a lagged and damped response. Differences in DTA and ELMv1-ECA modeled values are imperceptible in this figure.
         \label{fig:poolsOverTime}
+        }
     \end{figure}    
     
     % Is this figure showing both the computed values and the ELM values on top of each other? Or only the computed values. It is unclear from the legend ...although we know they would look the same, this should be clarified in the legend
     
 
-Although the error rates are extremely low across all pools over time, they vary systematically. The absolute percent error is larger for the CWD and litter pools than for the soil pools, and peaks during the atmospheric bomb period at around 0.025\% (Fig \ref{fig:10dayErrorOverTime}). The mean absolute percent errors for CTA $\Delta^{14}$C values are in most cases at least two orders of magnitude larger than those for $^{12}$C across sites and pools (Table \ref{tab:ErrorRatios}). The CTA error increases for larger time steps, being an order of magnitude larger for CWD and litter pools in the 10-day versus 1-day time step cases. However, the mean absolute percent error for the 10-day time step case remains very low: $< 1 \times 10^{-5}\,\%$ for $^{12}$C in all pools and sites, and $<0.01\,\%$ for $\Delta^{14}$C in all pools and sites (Table \ref{tab:ErrorRatios}), remaining well within model uncertainty bounds and soil heterogeneity.
+Although the error rates are extremely low across all pools over time, they vary systematically. The absolute percent error is larger for the CWD and litter pools than for the soil pools, and peaks during the atmospheric bomb period at around 0.025\% (Fig \ref{fig:10dayErrorOverTime}). The mean absolute percent errors for DTA $\Delta^{14}$C values are in most cases at least two orders of magnitude larger than those for $^{12}$C across sites and pools (Table \ref{tab:ErrorRatios}). The DTA error increases for larger time steps, being an order of magnitude larger for CWD and litter pools in the 10-day versus 1-day time step cases. However, the mean absolute percent error for the 10-day time step case remains very low: $< 1 \times 10^{-5}\,\%$ for $^{12}$C in all pools and sites, and $<0.01\,\%$ for $\Delta^{14}$C in all pools and sites (Table \ref{tab:ErrorRatios}), remaining well within model uncertainty bounds and soil heterogeneity.
 
 \begin{figure}[htbp]
         \centering 
-        \vspace{-8em}
+        %\vspace{-8em}
         \includegraphics[width=1.0\linewidth]{figs/C14_through_time_rel_err_10.pdf}
-        \vspace{-4em}
-        \caption{Relative error in radiocarbon values for CWD, litter and soil pools over time. Sites (top to bottom): Boreal, Temperate, Tropical. $\Delta^{14}$C percent error is approximately two orders of magnitude larger than $^{12}$C error. \red{show only Temperate site, make points (1) that largest biases is in litter immediately following the bomb spike and (2) biases are always small}}
+        %\vspace{-4em}
+        \caption{Relative error in radiocarbon values for CWD, aggregated litter and soil pools over time. Sites (top to bottom): Boreal, Temperate, Tropical forest. $\Delta^{14}$C percent error is approximately two orders of magnitude larger than $^{12}$C error. \red{make points (1) that largest biases is in litter immediately following the bomb spike and (2) biases are always small}}
         \label{fig:10dayErrorOverTime}
 \end{figure}    
 
@@ -585,13 +589,13 @@ Tropical & \num{2686} & \num{1138} & \num{599} &  & Tropical & \num{288} & \num{
 \section{Discussion}
 
 \subsection{Performance and future application}
-Using a 1-day time step, The DTA accurately matched ELMv1-ECA modeled $\Delta^{14}$C values ($<$0.001\% relative error). Although the error rate increases for larger time steps, low error ($<$0.01\% relative error) is still achieved with a 10-day time step (Table \ref{tab:ErrorRatios}). These results suggest the error would likely remain within reasonable bounds for a 30-day time step, which is commonly output from most ESMs. 
+Using a 1-day time step, The DTA accurately matched ELMv1-ECA modeled $\Delta^{14}$C values ($<$0.001\% relative error). Although the error rate increases for larger time steps, low error ($<$0.01\% relative error) is still achieved with a 10-day time step (Table \ref{tab:ErrorRatios}). These results suggest the error would likely remain within reasonable bounds for a 30-day time step, which is commonly output from most ESMs. \todo{why don't we also run the 30-day time step case?}
 
 \subsection{Future applications}
-The CTA and DTA approaches can be applied to numerical output from land carbon models to reconstruct a linear \todo{what is meant here by 'linear'? Is that appropriate?} version of the model that exactly matches the original model. The approximations can then be used to simulate isotope (e.g., \textsuperscript{14}C) dynamics consistent with the original model formulation of \textsuperscript{12}C dynamics. Furthermore, the approximations can be used for both single-depth and vertically-resolved soil radiocarbon models run at different spatial and temporal resolutions. We recommend using the DTA for reconstructing ESM-scale models, since the CTA computational requirements are much higher. For example, using a 1-day reconstruction of ELMv1-ECA for the period 1860-2010, the CTA computational time was \red{X (Holger)} times higher than using the DTA, and was not more accurate.
+The CTA and DTA approaches can be applied to numerical output from land carbon models to reconstruct a linear version of the model that exactly matches the output of the original model. The approximations can then be used to simulate isotope (e.g., \textsuperscript{14}C) dynamics consistent with the original model formulation of \textsuperscript{12}C dynamics. Furthermore, the approximations can be used for both single-depth and vertically-resolved soil radiocarbon models run at different spatial and temporal resolutions. We recommend using the DTA for reconstructing ESM-scale models, since the CTA makes implicit assumptions about what the original model does between the timesteps and these assumptions might not be justified.
 
 
-This CTA approach has widespread applicability, as it can be used across a range of models independent of their underlying structure. The approach does not require the model to implement additional isotope dynamics or tracers, but simply to output \textsuperscript{12}C stocks and fluxes. For maximum accuracy, all model stocks and fluxes are required (e.g., all individual transfers between all pools represented in the model). Aggregating C stocks and fluxes results in greatly increased uncertainties. However, given the uncertainties inherent to soil carbon dynamics in ESMs, reconstruction error may be lower than uncertainty in model structure and parameterization. Error arising from the aggregation of pools is of particular importance when models report carbon stocks only for aggregated pools (e.g., sum of all soil carbon pools in a particular soil layer). In such cases, the original and reconstructed model will differ in structure, leading to error in the reconstruction. This error would probably depend on the number and size of pools being aggregated, and on the temporal resolution of the output. Numerical errors and instabilities may also arise from empty or very small pools. For instance, we observed much larger percentage errors in deep litter and CWD pools that were almost empty. These errors were not large in our case, but attention must be paid in other cases when reconstructing models with near empty pools.
+This CTA/DTA approach has widespread applicability, as it can be used across a range of models independent of their underlying structure. The approach does not require the model to implement additional isotope dynamics or tracers, but simply to output \textsuperscript{12}C stocks and fluxes. For maximum accuracy, all model stocks and fluxes are required (e.g., all individual transfers between all pools represented in the model). Aggregating C stocks and fluxes results in greatly increased uncertainties. However, given the uncertainties inherent to soil carbon dynamics in ESMs, reconstruction error may be lower than uncertainty in model structure and parameterization. Error arising from the aggregation of pools is of particular importance when models report carbon stocks only for aggregated pools (e.g., sum of all soil carbon pools in a particular soil layer). In such cases, the original and reconstructed model will differ in structure, leading to error in the reconstruction. This error would probably depend on the number and size of pools being aggregated, and on the temporal resolution of the output. Numerical errors and instabilities may also arise from empty or very small pools. For instance, we observed much larger percentage errors in deep litter and CWD pools that were almost empty. These errors were not large in our case, but attention must be paid in other cases when reconstructing models with near empty pools.
 
 %\red{Make sure to cover: (1) what is required to make the approach work (fluxes and states that affect 12C); application to existing models; (2) application to single- and multi-layer models; (3) Discussion on why 12C does better than 14c? Relatedly, why does the soil do so much better than the litter and CWD? }
 
