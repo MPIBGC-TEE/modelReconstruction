@@ -474,7 +474,7 @@ The CTA approach exactly matches the system analytical solution for this case wi
         \begin{aligned}
             \deriv{t}\,\begin{pmatrix} C_1 \\ C_2 \end{pmatrix}(t) &= 
             \begin{pmatrix} -\gamma_1 & 0.5\,\gamma_2 \\ \gamma_1 & -\gamma_2 \end{pmatrix}(t)\,
-            \begin{pmatrix} C_1 \\ C_2 \end{pmatrix}(t) + 
+            \begin{pmatrix} C_1 \\ C_2 \end{pmatrix}(t) +  
             \begin{pmatrix} 0.5 \\ 0.5 + 0.5\,\sin(t/100) \end{pmatrix}(t),\\
             \begin{pmatrix} C_1 \\ C_2 \end{pmatrix}(1909) &=
             \begin{pmatrix} 40 \\ 0 \end{pmatrix},
@@ -497,8 +497,8 @@ The CTA approach exactly matches the system analytical solution for this case wi
 
 \begin{figure}[htbp]
         \centering 
-        \includegraphics[width=1.0\linewidth]{figs/depth_profile_10_manual_reorder_relabel.png}
-        \caption{DTA (using 1-day time step) and ELMv1-ECA modeled $\Delta^{14}$C values with depth in 1900, 1970, and 2010. The mean absolute DTA bias is less than $0.001$\% for $\Delta^{14}$C in soils across all sites. Sites (left to right): Boreal, Temperate, Tropical. $\Delta^{14}$C values decrease with depth, and become more enriched post-1960s as they take up bomb-derived $^{14}$C from the atmosphere.
+        \includegraphics[width=1.0\linewidth]{figs/depth_profile_10.pdf}
+        \caption{DTA (using 1-day time step) and ELMv1-ECA modeled $\Delta^{14}$C values with depth in 1900, 1970, and 2010. The mean absolute DTA bias is less than $0.001$\% for $\Delta^{14}$C in soils across all sites. Sites (left to right): Temperate, Tropical, Boreal. $\Delta^{14}$C values decrease with depth, and become more enriched post-1960s as they take up bomb-derived $^{14}$C from the atmosphere.
         \label{fig:depthProfiles}
         }
 \end{figure}      
@@ -520,7 +520,7 @@ In the 1960s, the radiocarbon concentration in the atmosphere increased sharply 
 \begin{figure}[htbp]
         \centering 
         \vspace{-8em}
-        \includegraphics[width=1.0\linewidth]{figs/Delta_14C_through_time_per_pools_10_updatedOrder.png}
+        \includegraphics[width=1.0\linewidth]{figs/Delta_14C_through_time_per_pools_10.pdf}
         \vspace{-4em}
         \caption{$\Delta^{14}$C values in all pools through time (Lines: ELMv1-ECA; dots: DTA using 1-day time step). Sites (top to bottom): Temperate, Tropical, and Boreal forests. LITTER 1,2,3 denote metabolic, cellulose, and lignin litters. SOIL 1,2,3 are fast, median, and passive soil pools. Atmospheric $\Delta^{14}$C values (blue) increase in response to bomb testing in the 1960s. Fast cycling pools increase most rapidly to the atmospheric $\Delta^{14}$C changes. Slower cycling pools show a lagged and damped response. Differences in DTA and ELMv1-ECA modeled values are imperceptible in this figure.
         \label{fig:poolsOverTime}
@@ -535,7 +535,7 @@ Although the relative errors were extremely low across all pools over time, the 
 \begin{figure}[htbp]
         \centering 
         %\vspace{-8em}
-        \includegraphics[width=1.0\linewidth]{figs/C14_through_time_rel_err_10_updatedLabel.png}
+        \includegraphics[width=1.0\linewidth]{figs/C14_through_time_rel_err_10.pdf}
         %\vspace{-4em}
         \caption{Relative error in radiocarbon values for CWD, aggregated litter and soil pools over time for the temperate forest site. $^{14}$C relative error is approximately two orders of magnitude larger than $^{12}$C error, but is always small in comparison to model uncertainty and spatial heterogeneity \citep{Chen2009JGR}. The largest biases in the litter pool follow the bomb spike in atmospheric $^{14}$C concentrations and vary seasonally.}
         \label{fig:10dayErrorOverTime}
