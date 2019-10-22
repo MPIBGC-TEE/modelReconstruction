@@ -1,0 +1,50 @@
+\documentclass[11pt]{bgcletter}
+\usepackage{hyperref}
+
+\name{Dr.\ Carlos A. Sierra}
+\signature{Holger Metzler and Carlos A. Sierra on behalf of all authors}
+\email{csierra}
+\telephone{6133}
+
+\begin{document}
+\begin{letter}{Dr. Eleanor Blyth\\
+ Editor \\ Journal of Advances in Modeling Earth Systems}
+
+\opening{Dear Dr. Blyth}
+Thank you very much for handling our manuscript and for the opportunity to submit a revised version. As suggested, we made minor changes to the manuscript based on the reviewers' comments. We \dots
+
+ In the text below, we provide answers ({\color{blue} blue font}) to all reviewers' comments ({\it italics font}). 
+
+{\bf Reviewer 1} \\
+{\it The manuscript presents a nice way to mathematically compute radiocarbon values in soils from the output of Earth System Models. Authors discussed mathematical details of the approach along with examples using three different soil profiles. In my opinion, the manuscript is publishable in JAMES in its present form. }
+
+{\color{blue} Thanks for recognizing the value of the approach presented in the manuscript and for recommending publication in its present form.}
+
+{\bf Reviewer 2} \\
+{\it In this study, Metzler and his colleagues provide a very important and interesting approach to benchmark global land carbon-cycle models based on radiocarbon data. This approach could be a great contribution to connect the research communities of Earth system modeling and radiocarbon. I have carefully studied their mathematic assumptions and derivation. I found their work is solid, though the writing is very technical for both Earth system modelers and empirical scientists who use radiocarbon as their major research tools. Thus, I only have some broad suggestions on discussion and a few specific suggestions on the details. Overall, I recommend JAMES to publish this work with some minor revisions. }
+
+{\color{blue} Thanks for recognizing the value of our contribution. We also recognize that the writing is very technical, but we think it is fundamental to present the mathematical approach we developed so other groups can replicate it. A mathematical reconstruction of a complex land surface model is not a trivial task, and it has not been  reported before in the literature (as far as we are concerned). Therefore, we need to set the theoretical basis of the approach first before we use it for other applications. We believe JAMES offers the perfect outlet for this type of work and we're happy that it can be accepted after minor revisions. }
+
+{\it Page 13, Lines 278-292: The authors used the accelerated-decomposition approach to spin up their model. The ``1000yr+400yr'' spinup time seems common for a global model, but it might be careful for a global model with 10 vertical layers. The criterion of $<0.01$\% yr-1 change usually cannot constrain the steady state of passive SOC pool in deep soils, which has a large pool size but very low turnover rate. This issue must has a small impact on the results in this study, but may generate some errors when apply their approach for long-term approximation. }
+
+{\color{blue} We agree with the reviewer in that there are problems related to the spinup procedure when there are very slow cycling pools. This is mostly an issue in the setup of specific simulations, and as acknowledged by the reviewer, it has no impact on the approach we developed. Nevertheless, it is possible that an incomplete spinup may affect radiocarbon simulations because carbon with very long ages may not be present at the beginning of the simulations. To make modelers aware of this problem, we introduced a sentence in the discussion hilighting this potential problem, which again, is a problem of any simulation setup and not a problem of the approach we developed.}
+
+{\it Page 15, Lines above 312: It is good to gradually introduce the approach from single to two compartment system. How about to give one or two real examples of natural ecosystems for the ``two compartment system'' here? For example, vegetation-soil could be a nice ``two compartment system''. I feel this may make these equations more understandable for an empirical scientist.}
+
+{\color{blue} Thanks for the suggestion. We included in sections 4.1 and 4.2 relevant soil-model examples that use either the one- or two-pool model approach.}
+
+{\it Page 24, Line 401-402: The authors suggest that using their proposed approach can avoid rewriting the model in matrix form. I agree that rewriting the models into matrix form is not necessary for the benchmarking analysis based on radiocarbon data. However, as I know, one goal of the traceability framework in Luo et al. (2017) and Xia et al. (2013) was to enhance the understandability of the spread results among different models. As also highlighted by some recent papers (e.g., Bonan et al. 2019GBC), understanding the difference between models itself becomes very important for model improvements. In my opinion, the approach in Metzler et al.'s paper has shown the great potential to use matrix approach to improve the Earth system models, even without the information of model structure. However, this approach could be more efficient if some additional outputs or information could be provided by the community of Earth system model. I highly recommend the authors to add some detailed suggestions here for the CMIP6 community to promote the application of the matrix approach. }
+
+{\color{blue} It seems that there is a misunderstanding of our message in this paragraph. Here, we do not say that our approach avoids writing the models in matrix form. It only avoids writing the analytical formulas of the model, which in our approach are replaced by numerical representations of the matrix form. However, we still need to write the matrices and need to know the general structure of the model in terms of number of compartments and how are they connected. The traceability framework can still be performed with this numerical representation of the models in matrix form, except that the detail of the equations that produce the numerical output are not necessarily known. This has advantages and disadvantages. One advantage is that it is possible to include all other interactions between the carbon cycle and the water, nutrient, and energy cycles in the model without having to disentangle this information from the model's code; something that in practice can be extremely difficult. A disadvantage however, is that it is not possible to obtain all information about the source of the numbers that compose the matrix and therefore it makes it difficult to compare models at their core. We included in this paragraph some discussion about these topics to avoid misunderstandings. }
+
+{\it Application of the Metzler et al.'s approach to CMIP6 models: the timestep of model output is usually monthly, and only a few variables have daily outputs. The bias of the matrix approximation is relatively larger in the surface soil layers as shown in Fig. 4, even with a 10-day output timestep. So, it would be great if the authors can show how their approach performs with the monthly outputs. If the bias is large, then a recommendation of weekly output could make for the ESM community, at least for the historical runs}
+
+{\color{blue} The time step for the model reconstruction is not necessarily an important problem to apply our CTA approach to CMIP6 models. We ran simulations at a 30-day time step and found perceptible differences between model results and the reconstruction. However, a major problem with CMIP6 models is that in most cases fluxes are provided in an aggregated form. This is indeed a much larger problem than the time step error. We introduced some text in the conclusions to address this issue.}
+
+\vspace{2em}
+We hope this new version adequately addresses reviewer's comments and it is now suitable for publication.
+
+\closing{Sincerely,}
+ \end{letter}
+
+ \end{document}
