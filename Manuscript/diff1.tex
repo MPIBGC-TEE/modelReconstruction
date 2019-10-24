@@ -1,7 +1,7 @@
 %DIF 1-64d1
 %DIF LATEXDIFF DIFFERENCE FILE
-%DIF DEL main.tex       Wed Oct 23 17:57:38 2019
-%DIF ADD mainRev1.tex   Wed Oct 23 17:57:38 2019
+%DIF DEL main.tex       Thu Oct 24 08:39:24 2019
+%DIF ADD mainRev1.tex   Thu Oct 24 08:48:17 2019
 %DIF < %\documentclass[11pt,a4paper]{article}
 %DIF < %\usepackage[colorinlistoftodos]{todonotes}
 %DIF < %
@@ -145,6 +145,47 @@
 \providecommand{\DIFaddendFL}{} %DIF PREAMBLE
 \providecommand{\DIFdelbeginFL}{} %DIF PREAMBLE
 \providecommand{\DIFdelendFL}{} %DIF PREAMBLE
+\newcommand{\DIFscaledelfig}{0.5}
+%DIF HIGHLIGHTGRAPHICS PREAMBLE %DIF PREAMBLE
+\RequirePackage{settobox} %DIF PREAMBLE
+\RequirePackage{letltxmacro} %DIF PREAMBLE
+\newsavebox{\DIFdelgraphicsbox} %DIF PREAMBLE
+\newlength{\DIFdelgraphicswidth} %DIF PREAMBLE
+\newlength{\DIFdelgraphicsheight} %DIF PREAMBLE
+% store original definition of \includegraphics %DIF PREAMBLE
+\LetLtxMacro{\DIFOincludegraphics}{\includegraphics} %DIF PREAMBLE
+\newcommand{\DIFaddincludegraphics}[2][]{{\color{blue}\fbox{\DIFOincludegraphics[#1]{#2}}}} %DIF PREAMBLE
+\newcommand{\DIFdelincludegraphics}[2][]{% %DIF PREAMBLE
+\sbox{\DIFdelgraphicsbox}{\DIFOincludegraphics[#1]{#2}}% %DIF PREAMBLE
+\settoboxwidth{\DIFdelgraphicswidth}{\DIFdelgraphicsbox} %DIF PREAMBLE
+\settoboxtotalheight{\DIFdelgraphicsheight}{\DIFdelgraphicsbox} %DIF PREAMBLE
+\scalebox{\DIFscaledelfig}{% %DIF PREAMBLE
+\parbox[b]{\DIFdelgraphicswidth}{\usebox{\DIFdelgraphicsbox}\\[-\baselineskip] \rule{\DIFdelgraphicswidth}{0em}}\llap{\resizebox{\DIFdelgraphicswidth}{\DIFdelgraphicsheight}{% %DIF PREAMBLE
+\setlength{\unitlength}{\DIFdelgraphicswidth}% %DIF PREAMBLE
+\begin{picture}(1,1)% %DIF PREAMBLE
+\thicklines\linethickness{2pt} %DIF PREAMBLE
+{\color[rgb]{1,0,0}\put(0,0){\framebox(1,1){}}}% %DIF PREAMBLE
+{\color[rgb]{1,0,0}\put(0,0){\line( 1,1){1}}}% %DIF PREAMBLE
+{\color[rgb]{1,0,0}\put(0,1){\line(1,-1){1}}}% %DIF PREAMBLE
+\end{picture}% %DIF PREAMBLE
+}\hspace*{3pt}}} %DIF PREAMBLE
+} %DIF PREAMBLE
+\LetLtxMacro{\DIFOaddbegin}{\DIFaddbegin} %DIF PREAMBLE
+\LetLtxMacro{\DIFOaddend}{\DIFaddend} %DIF PREAMBLE
+\LetLtxMacro{\DIFOdelbegin}{\DIFdelbegin} %DIF PREAMBLE
+\LetLtxMacro{\DIFOdelend}{\DIFdelend} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFaddbegin}{\DIFOaddbegin \let\includegraphics\DIFaddincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFaddend}{\DIFOaddend \let\includegraphics\DIFOincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFdelbegin}{\DIFOdelbegin \let\includegraphics\DIFdelincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFdelend}{\DIFOaddend \let\includegraphics\DIFOincludegraphics} %DIF PREAMBLE
+\LetLtxMacro{\DIFOaddbeginFL}{\DIFaddbeginFL} %DIF PREAMBLE
+\LetLtxMacro{\DIFOaddendFL}{\DIFaddendFL} %DIF PREAMBLE
+\LetLtxMacro{\DIFOdelbeginFL}{\DIFdelbeginFL} %DIF PREAMBLE
+\LetLtxMacro{\DIFOdelendFL}{\DIFdelendFL} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFaddbeginFL}{\DIFOaddbeginFL \let\includegraphics\DIFaddincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFaddendFL}{\DIFOaddendFL \let\includegraphics\DIFOincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFdelbeginFL}{\DIFOdelbeginFL \let\includegraphics\DIFdelincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFdelendFL}{\DIFOaddendFL \let\includegraphics\DIFOincludegraphics} %DIF PREAMBLE
 %DIF END PREAMBLE EXTENSION ADDED BY LATEXDIFF
 
 \begin{document}
@@ -219,11 +260,11 @@ Carbon cycle models are subject to the law of mass conservation and therefore ca
 
 To guarantee mass conservation, the matrix $\tens{B}(\vec{C},t)$ is required to be compartmental 
 for all nonnegative $\vec{C}$ and $t>t_0$, i.e., $\tens{B}(\vec{C},t)=(\tens{B}_{ij}(\vec{C},t))_{i,j=1,2,\ldots,d}$ satisfies the properties
-     \begin{enumerate} [(i)]
+    \begin{enumerate}[(i)]
         \item $B_{ii}(\vec{C},t)\leq0$ for all $i$,
         \item $B_{ij}(\vec{C},t)\geq0$ for all $i\neq j$,
         \item $\suml_{i=1}^d B_{ij}(\vec{C},t)\leq0$ for all $j$.
-     \end{enumerate} 
+    \end{enumerate}
 The diagonal values of $B_{ii}$ can be interpreted as the cycling rate of compartment $i$, the off-diagonal entries $B_{ij}$ represent the rate of carbon flux from compartment $j$ to compartment $i$, and $z_j=-\sum_{i=1}^d B_{ij}$ is the rate of carbon leaving the system through pool $j$.
 
     We now assume that we know a unique (numerical) solution $\vec{C}=\vec{C}(t)$ of system \eqref{eqn:CS_td_nonlin}.
@@ -301,11 +342,11 @@ The approach presented above works only when the original model is completely de
         \end{equation}
         where $\gamma(t)$ and $u(t)$ are unknown.
         Further, for discrete times $t_0<t_1<t_2<\cdots<t_n$ we are given
-         \begin{itemize} 
+        \begin{itemize}
             \item the initial system state $C^0$,
             \item $u^k = \intl_{t_k}^{t_{k+1}} u(t)\dd{t},\quad k=0,1,\ldots,n-1$, and
             \item $r^k = \intl_{t_k}^{t_{k+1}} r(t)\dd{t},\quad k=0,1,\ldots,n-1$.
-         \end{itemize} 
+        \end{itemize}
         Here, $u^k$ and $r^k$ denote the accumulated external system input and the accumulated external system output in the time interval $I_k=[t_k,t_{k+1}]$, $k=0,1,\ldots,n-1$, respectively.
 
         We are interested in constructing a compartmental system, as simple as possible, that matches these given data as well as possible.
@@ -365,12 +406,12 @@ The approach presented above works only when the original model is completely de
         \end{equation}
         of which $\tens{B}(t)=(B_{ij}(t))_{i,j=1,2,\ldots,d}$ and $\vec{u}(t)=(u_i(t))_{i=1,2,\ldots,d}$ are unknown.
         But for discrete times $t_0<t_1<t_2<\cdots<t_n$ we are given
-         \begin{itemize} 
+        \begin{itemize}
             \item the initial system content vector $\vec{C}^0=(C^0_1,C^0_2,\ldots,C^0_d)^T$,
             \item $\vec{u}^k = \intl_{t_k}^{t_{k+1}} \vec{u}(t)\dd{t},\quad k=0,1,\ldots,n-1$, 
             \item $\vec{r}^k = \intl_{t_k}^{t_{k+1}} \vec{r}(t)\dd{t},\quad k=0,1,\ldots,n-1$, and
             \item $F_{ij}^k = \intl_{t_k}^{t_{k+1}} B_{ij}(t)\,C_j(t)\dd{t},\quad i\neq j$.
-         \end{itemize} 
+        \end{itemize}
         Here, $\vec{u}^k$ and $\vec{r}^k$ denote the accumulated external system input vector and the accumulated external system output vector in the time interval $I_k=[t_k,t_{k+1}]$, $k=0,1,\ldots,n-1$, respectively.
         Furthermore, $F^k_{ij}$ denotes the accumulated flux from compartment $j$ to compartment $i$ during $I_k$.
 
@@ -431,10 +472,10 @@ The approach presented above works only when the original model is completely de
         \end{aligned}
     \end{equation}
     The discrete-time compartmental matrices $\widehat{\tens{B}}(k)$ satisfy for all $k=0,1,\ldots,n-1$ two conditions
-     \begin{enumerate} [(i)]
+    \begin{enumerate}[(i)]
         \item $\widehat{B}_{ij}(k)\geq0$ for all $i,j=1,2,\ldots,d$, and
         \item $\suml_{i=1}^d \widehat{B}_{ij}(k)\leq 1$ for all $j=1,2,\ldots,d$.
-     \end{enumerate} 
+    \end{enumerate}
     Analogously to the CTA, $\widehat{z}_j(k)=1-\sum_{i=1}^d \widehat{B}_{ij}(k)$ is the rate at which mass at time step $k$ leaves the system through compartment $j$.
     The discrete-time state-transition matrix is, for $0\leq k_1<k_2\leq n$, given by
 
@@ -449,12 +490,12 @@ The approach presented above works only when the original model is completely de
 
     Suppose we are given a $d$-compartment time-dependent linear system with structure \eqref{eqn:CS_multi_dim} and unknown $\tens{B}$ and $\vec{u}$.
     For discrete times $t_0<t_1<t_2<\cdots<t_n$ we are given
-     \begin{itemize} 
+    \begin{itemize}
         \item the initial system content vector $\vec{C}^0=(C^0_1,C^0_2,\ldots,C^0_d)^T$,
         \item $\vec{u}^k = \intl_{t_k}^{t_{k+1}} \vec{u}(t)\dd{t},\quad k=0,1,\ldots,n-1$, 
         \item $\vec{r}^k = \intl_{t_k}^{t_{k+1}} \vec{r}(t)\dd{t},\quad k=0,1,\ldots,n-1$, and
         \item $F_{ij}^k = \intl_{t_k}^{t_{k+1}} B_{ij}(t)\,C_j(t)\dd{t},\quad i\neq j$.
-     \end{itemize} 
+    \end{itemize}
     Here, $\vec{u}^k$ and $\vec{r}^k$ denote the accumulated external system input vector and the accumulated external system output vector in the time interval $I_k=[t_k,t_{k+1}]$, $k=0,1,\ldots,n-1$, respectively.
     Furthermore, $F^k_{ij}$ denotes the accumulated flux from compartment $j$ to compartment $i$ during $I_k$.
 
@@ -490,7 +531,7 @@ The approach presented above works only when the original model is completely de
  %   \item Present the simulation protocol (spinup, forcing, site characteristics) and how 14C is calculated.
   In this study, we present simulation results from ESMv1-ECA at three sites with contrasting background climate dynamics: boreal (62.5 E, 67.3 N), temperate  (72.2 W, 42.5 N), and tropical (60.0 W, 3.1 S) forest sites. The boreal forest site is located in Eurasia, dominated by needleleaf evergreen trees, and has  a relatively dry and cold climate (Mean Annual Precipitation (MAP) 800 mm yr\textsuperscript{-1}; Mean Annual Temperature (MAT) -6 \textsuperscript{o}C). The deciduous broadleaf temperate forest site is located at Harvard Forest with a moist and warm climate (MAP 1200 mm yr\textsuperscript{-1}; MAT 10 \textsuperscript{o}C). The tropical site is an evergreen broadleaf rainforest (Manaus, Brazil) with hot and wet climate (MAP 2200 mm yr\textsuperscript{-1}; MAT 27 \textsuperscript{o}C). These sites were selected due to their representative background climates and plant functional types representing high, mid, and low latitude ecosystems.
 
-    Characteristics for the three sites were extracted from the standard global model datasets, which are used to set plant functional types, soil properties, etc. \cite{Zhu2019}. The simulation protocol for all three sites follows the standard approach described in \citeA{Oleson2010}. The model is first spun up (i.e., brought close to equilibrium) using an accelerated soil decomposition approach \cite{Koven2013} for 1000 years, followed by a 400 year regular spin up with regular soil decomposition. Soil phosphorus pools were initialized from an observationally-derived dataset \cite{Yang2013} at the beginning of the regular spinup. The spinup simulations were forced with repeated meteorology (GSWP reanalysis \cite{Dirmeyer2006} from year 1901 to 1920) and constant atmospheric CO$_2$ mole fraction (285 ppm). We evaluated the model's spun-up soil carbon stock to ensure changes at the end of the spin up are less than 0.01 \% yr\textsuperscript{-1}. After spinup, the model was run in a transient simulation from 1850 to 2010 with GSWP reanalysis forcing \cite{Dirmeyer2006}, transient CO$_2$ concentrations, N deposition \cite{Lamarque2005}, and P deposition \cite{Mahowald2008}. Atmospheric   $\Delta^{14}$C  is prescribed to be zero during spinup simulations and using observed values during transient simulations \cite{Levin2010}. \DIFaddbegin \DIFadd{The spinup procedure ultimately determines the distribution of radiocarbon in the vector of initial carbon contents. Other spinup procedures may lead to different initial radiocarbon distributions, however this is an issue particular for each simulation setup with not relevance for the reconstruction of the model in the transient simulation. 
+    Characteristics for the three sites were extracted from the standard global model datasets, which are used to set plant functional types, soil properties, etc. \cite{Zhu2019}. The simulation protocol for all three sites follows the standard approach described in \citeA{Oleson2010}. The model is first spun up (i.e., brought close to equilibrium) using an accelerated soil decomposition approach \cite{Koven2013} for 1000 years, followed by a 400 year regular spin up with regular soil decomposition. Soil phosphorus pools were initialized from an observationally-derived dataset \cite{Yang2013} at the beginning of the regular spinup. The spinup simulations were forced with repeated meteorology (GSWP reanalysis \cite{Dirmeyer2006} from year 1901 to 1920) and constant atmospheric CO$_2$ mole fraction (285 ppm). We evaluated the model's spun-up soil carbon stock to ensure changes at the end of the spin up are less than 0.01 \% yr\textsuperscript{-1}. After spinup, the model was run in a transient simulation from 1850 to 2010 with GSWP reanalysis forcing \cite{Dirmeyer2006}, transient CO$_2$ concentrations, N deposition \cite{Lamarque2005}, and P deposition \cite{Mahowald2008}. Atmospheric   $\Delta^{14}$C  is prescribed to be zero during spinup simulations and using observed values during transient simulations \cite{Levin2010}. \DIFaddbegin \DIFadd{The spinup procedure ultimately determines the distribution of radiocarbon in the vector of initial carbon contents. Other spinup procedures may lead to different initial radiocarbon distributions, however this is an issue particular for each simulation setup without relevance for the reconstruction of the model in the transient simulation. 
     }\DIFaddend 
 
     We performed analyses using different approaches to reconstruct ELMv1-ECA predictions from model output. To characterize the effect of temporal discretization, we applied the DTA approach using ELMv1-ECA output averaged over 1- and 10-day time steps. This analysis will inform required output frequency for other models to apply model reconstruction. %Second, we also tested the effects of consolidating all soil C pool states and fluxes at each depth layer on the predicted $\Delta^{14}$C values of the total soil C stock. 
@@ -670,7 +711,7 @@ In addition, the reconstruction we propose of numerical model output as a dynami
 \cite{Luo2015}}%DIFAUXCMD
 }\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
 \cite{Xia2013, Luo2015}}%DIFAUXCMD
-}\DIFaddend . From the numerical model reconstructions we proposed here, it is possible to perform these analyses without the need to analytically rewrite existing models in matrix form. \DIFaddbegin \DIFadd{This means that it is still possible to obtain time-dependent versions of these matrices and vectors in numeric form, without the need to explicitly write all equations of the model. This can be an advantage for complex models with multiple interactions between the carbon cycle and the water, nutrient, and energy cycles. 
+}\DIFaddend . From the numerical model reconstructions we proposed here, it is possible to perform these analyses without the need to analytically rewrite existing models in matrix form. \DIFaddbegin \DIFadd{This means that it is still possible to obtain time-dependent versions of these matrices and vectors in numeric form, without the need to explicitly write by hand all equations of the model. This can be an advantage for complex models with multiple interactions between the carbon cycle and the water, nutrient, and energy cycles. 
 }\DIFaddend 
 
 \section{Conclusions}
