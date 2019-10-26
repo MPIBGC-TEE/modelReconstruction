@@ -1,0 +1,33 @@
+Temperate forest
+----------------
+C12 mean absolute relative error (SOIL): 0.000001
+C14 mean absolute relative error (SOIL): 0.000256
+
+C12 mean absolute relative error (CWD): 0.000001
+C14 mean absolute relative error (CWD): 0.000255
+
+C12 mean absolute relative error (LITTER): 0.000012
+C14 mean absolute relative error (LITTER): 0.001411
+
+Tropical forest
+---------------
+C12 mean absolute relative error (SOIL): 0.000001
+C14 mean absolute relative error (SOIL): 0.000273
+
+C12 mean absolute relative error (CWD): 0.000001
+C14 mean absolute relative error (CWD): 0.000296
+
+C12 mean absolute relative error (LITTER): 0.000004
+C14 mean absolute relative error (LITTER): 0.000477
+
+Boreal forest
+-------------
+C12 mean absolute relative error (SOIL): 0.000002
+C14 mean absolute relative error (SOIL): 0.000368
+
+C12 mean absolute relative error (CWD): 0.000121
+C14 mean absolute relative error (CWD): 0.000262
+
+C12 mean absolute relative error (LITTER): 0.002477
+C14 mean absolute relative error (LITTER): 0.002344
+
