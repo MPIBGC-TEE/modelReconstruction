@@ -1,6 +1,4 @@
-## script to convert Qing's old .nc files with a 
-## sequence of cells into a gridded structure (lat, lon)
-
+## Select only the necessary dimensions and variables from '..Data/holger.new2sites.nc' to 'JAMES.nc'
 
 import numpy as np
 import numpy.ma as ma

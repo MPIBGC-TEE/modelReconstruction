@@ -17,7 +17,7 @@
 ##               discrete_model_run.py (included)
 ##               ELM_load_dmr.py (included)              
 ##
-## Input:        '../Data/JAMES.nc' (ELM model run data, unzip first)
+## Input:        '../Data/JAMES.nc' (ELM model run data, maybe unzip first)
 ##               '../Data/C14Atm_NH.csv' (Atmospheric 14C values)
 ##
 ## Output:       To subfolder 'Output"
