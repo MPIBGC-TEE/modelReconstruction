@@ -415,7 +415,7 @@ We consider first a one compartment system with constant inputs and rates that r
         C(1909) &= 40.
     \end{aligned}
 \end{equation}
-The CTA approach exactly matches the system analytical solution despite the relatively small number of data points available for the reconstruction, $n=3,6$ (Figure \ref{fig:CS_one_dim_example_auton}).
+The CTA approach exactly matches the system's analytical solution despite the relatively small number of data points available for the reconstruction, $n=3,6$ (Figure \ref{fig:CS_one_dim_example_auton}).
 
 \begin{figure}[htbp]
     \centering 
@@ -432,8 +432,8 @@ Consider the one compartment system with time-dependent inputs beginning in year
 
 \begin{equation}\label{eqn:CS_one_dim_example}
     \begin{aligned}
-        \deriv{t}\,C(t) &= -0.04\,C(t) + \left[3+\sin(t/20)\right],\quad t>1909,\\
-        C(1909) &= 40.
+        \deriv{t}\,C(t) &= -0.04\,C(t) + \left[3+\sin(t/20)\right],\quad t>1919,\\
+        C(1919) &= 40.
     \end{aligned}
 \end{equation}
  The CTA improves with increasing number $n$ of data points used in the approximation (Figure \ref{fig:CS_one_dim_example}).
@@ -443,7 +443,7 @@ Consider the one compartment system with time-dependent inputs beginning in year
     \centering 
     \includegraphics[width=1.0\linewidth]{figs/interpol_pwc_1.pdf}
     \caption{Transient C stocks of the one-compartment system with time-dependent inputs reconstructed by CTA for different data time steps $\Delta t$.
-    Mean annual absolute bias is $\SI{3.92}{\percent}$, $\SI{0.92}{\percent}$, and $\SI{0.46}{\percent}$ for $\Delta{t} = \SI{30}{\yr}$, $\SI{20}{\yr}$, and $\SI{10}{\yr}$, respectively.
+    Mean annual absolute bias is $\SI{3.92}{\percent}$, $\SI{0.96}{\percent}$, and $\SI{0.43}{\percent}$ for $\Delta{t} = \SI{30}{\yr}$, $\SI{20}{\yr}$, and $\SI{10}{\yr}$, respectively.
     The solid black line represents the carbon content of the original system \eqref{eqn:CS_one_dim_example}, the dashed lines represent the carbon contents of the CTAs with different time steps.}    
     \label{fig:CS_one_dim_example}
 \end{figure}        
@@ -466,7 +466,7 @@ Consider the one compartment system with time-dependent inputs beginning in year
     \end{equation}
     where $\gamma_1(t)=0.1+0.05\,\sin(0.1\,t)$, $\gamma_2=0.05$.
     
-     In this case, data from the original model extracted at 5 y time steps leads to a very accurate CTA, whereas coarser temporal time steps lead to progressively worse approximations (Figure \ref{fig:CS_two_dim_example}).
+     In this case, data from the original model extracted at 5 yr time steps leads to a very accurate CTA, whereas coarser temporal time steps lead to progressively worse approximations (Figure \ref{fig:CS_two_dim_example}).
     \begin{figure}[htbp]
         \centering 
         \includegraphics[width=1.0\linewidth]{figs/interpol_pwc_2.pdf}
@@ -572,6 +572,8 @@ Radiocarbon is a valuable tracer to evaluate, understand, and improve soil carbo
 %\section*{Acknowledgements}
 \acknowledgments
 Funding was provided by the Max Planck Society and the German Research Foundation through its Emmy Noether Program (SI 1953/2--1). A.M.H. received funding from the European Research Council (ERC) under the European Union’s Horizon 2020 research and innovation programme (grant agreement No. 695101 (14Constraint)). WJR and QZ were funded by the Director, Office of Science, Office of Biological and Environmental Research of the US Department of Energy under Contract No. DE-AC02-05CH11231 as part of the Regional and Global Climate Modeling (RGCM), RUBISCO SFA, and the E3SM project.
+
+All code required to reproduce the results of this manuscript is permanently archived at \url{doi:1122.3344.5}
 
 %\bibliographystyle{apalike}
 %\bibliographystyle{gcb}
