@@ -1,4 +1,4 @@
-## Repdrocude the simple model plots of JAMES manuscript
+## Reproduce the simple model plots of JAMES manuscript
 ##
 ## Title:        Mathematical reconstruction of land carbon models from their
 ##               numerical output: computing soil radiocarbon from 12C dynamics

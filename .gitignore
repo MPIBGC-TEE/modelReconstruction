@@ -13,3 +13,9 @@
 
 # Document
 main.pdf
+
+# Data
+Data/JAMES.nc
+
+# Python cache
+__pycache__/
