@@ -1,3 +1,8 @@
+
+
+[![DOI](https://zenodo.org/badge/217027606.svg)](https://zenodo.org/badge/latestdoi/217027606)
+
+
 # Mathematical reconstruction of land carbon models from their numerical output: computing soil radiocarbon from <sup>12</sup>C dynamics
 
 This repository contains all files related to the manuscript
