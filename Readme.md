@@ -19,7 +19,7 @@ It contains all manuscript files as well as the code to reproduce all results pr
 This folder contains all original LaTeX files used to prepare the publication, including a BibTeX file with references and a folder with all figures.
 
 ## Data
-We provide two datasets to reproduce all results from the manuscript. The file `C14Atm_NH.csv` contains atmospheric radiocarbon data for the northern hemisphere. This data is used to inform the model about the inputs of radiocarbon to the ecosystem. These atmospheric radiocarbon data are consistent with the data used to run the original ELM model.
+We provide two datasets to reproduce all results from the manuscript. The file `C14Atm_NH.csv` contains atmospheric radiocarbon data for the northern hemisphere. These data are used to inform the model about the inputs of radiocarbon to the ecosystem. These atmospheric radiocarbon data are consistent with the data used to run the original ELM model.
 
 The second dataset is the output from the ELM model used for the reconstruction. Given its size, the data was compressed and split in four different files: `JAMES.nc.7z.001` to `JAMES.nc.7z.004`. The compression was done with [7zip](https://www.7-zip.org/). On the command line, the compressed data can be extracted and merged with the command
 
