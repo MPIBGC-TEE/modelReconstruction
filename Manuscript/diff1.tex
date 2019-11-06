@@ -1,7 +1,7 @@
 %DIF 1-64d1
 %DIF LATEXDIFF DIFFERENCE FILE
-%DIF DEL main.tex       Thu Oct 24 08:39:24 2019
-%DIF ADD mainRev1.tex   Thu Oct 24 08:48:17 2019
+%DIF DEL main.tex       Wed Oct 23 17:57:38 2019
+%DIF ADD mainRev1.tex   Sun Oct 27 14:40:50 2019
 %DIF < %\documentclass[11pt,a4paper]{article}
 %DIF < %\usepackage[colorinlistoftodos]{todonotes}
 %DIF < %
@@ -145,47 +145,6 @@
 \providecommand{\DIFaddendFL}{} %DIF PREAMBLE
 \providecommand{\DIFdelbeginFL}{} %DIF PREAMBLE
 \providecommand{\DIFdelendFL}{} %DIF PREAMBLE
-\newcommand{\DIFscaledelfig}{0.5}
-%DIF HIGHLIGHTGRAPHICS PREAMBLE %DIF PREAMBLE
-\RequirePackage{settobox} %DIF PREAMBLE
-\RequirePackage{letltxmacro} %DIF PREAMBLE
-\newsavebox{\DIFdelgraphicsbox} %DIF PREAMBLE
-\newlength{\DIFdelgraphicswidth} %DIF PREAMBLE
-\newlength{\DIFdelgraphicsheight} %DIF PREAMBLE
-% store original definition of \includegraphics %DIF PREAMBLE
-\LetLtxMacro{\DIFOincludegraphics}{\includegraphics} %DIF PREAMBLE
-\newcommand{\DIFaddincludegraphics}[2][]{{\color{blue}\fbox{\DIFOincludegraphics[#1]{#2}}}} %DIF PREAMBLE
-\newcommand{\DIFdelincludegraphics}[2][]{% %DIF PREAMBLE
-\sbox{\DIFdelgraphicsbox}{\DIFOincludegraphics[#1]{#2}}% %DIF PREAMBLE
-\settoboxwidth{\DIFdelgraphicswidth}{\DIFdelgraphicsbox} %DIF PREAMBLE
-\settoboxtotalheight{\DIFdelgraphicsheight}{\DIFdelgraphicsbox} %DIF PREAMBLE
-\scalebox{\DIFscaledelfig}{% %DIF PREAMBLE
-\parbox[b]{\DIFdelgraphicswidth}{\usebox{\DIFdelgraphicsbox}\\[-\baselineskip] \rule{\DIFdelgraphicswidth}{0em}}\llap{\resizebox{\DIFdelgraphicswidth}{\DIFdelgraphicsheight}{% %DIF PREAMBLE
-\setlength{\unitlength}{\DIFdelgraphicswidth}% %DIF PREAMBLE
-\begin{picture}(1,1)% %DIF PREAMBLE
-\thicklines\linethickness{2pt} %DIF PREAMBLE
-{\color[rgb]{1,0,0}\put(0,0){\framebox(1,1){}}}% %DIF PREAMBLE
-{\color[rgb]{1,0,0}\put(0,0){\line( 1,1){1}}}% %DIF PREAMBLE
-{\color[rgb]{1,0,0}\put(0,1){\line(1,-1){1}}}% %DIF PREAMBLE
-\end{picture}% %DIF PREAMBLE
-}\hspace*{3pt}}} %DIF PREAMBLE
-} %DIF PREAMBLE
-\LetLtxMacro{\DIFOaddbegin}{\DIFaddbegin} %DIF PREAMBLE
-\LetLtxMacro{\DIFOaddend}{\DIFaddend} %DIF PREAMBLE
-\LetLtxMacro{\DIFOdelbegin}{\DIFdelbegin} %DIF PREAMBLE
-\LetLtxMacro{\DIFOdelend}{\DIFdelend} %DIF PREAMBLE
-\DeclareRobustCommand{\DIFaddbegin}{\DIFOaddbegin \let\includegraphics\DIFaddincludegraphics} %DIF PREAMBLE
-\DeclareRobustCommand{\DIFaddend}{\DIFOaddend \let\includegraphics\DIFOincludegraphics} %DIF PREAMBLE
-\DeclareRobustCommand{\DIFdelbegin}{\DIFOdelbegin \let\includegraphics\DIFdelincludegraphics} %DIF PREAMBLE
-\DeclareRobustCommand{\DIFdelend}{\DIFOaddend \let\includegraphics\DIFOincludegraphics} %DIF PREAMBLE
-\LetLtxMacro{\DIFOaddbeginFL}{\DIFaddbeginFL} %DIF PREAMBLE
-\LetLtxMacro{\DIFOaddendFL}{\DIFaddendFL} %DIF PREAMBLE
-\LetLtxMacro{\DIFOdelbeginFL}{\DIFdelbeginFL} %DIF PREAMBLE
-\LetLtxMacro{\DIFOdelendFL}{\DIFdelendFL} %DIF PREAMBLE
-\DeclareRobustCommand{\DIFaddbeginFL}{\DIFOaddbeginFL \let\includegraphics\DIFaddincludegraphics} %DIF PREAMBLE
-\DeclareRobustCommand{\DIFaddendFL}{\DIFOaddendFL \let\includegraphics\DIFOincludegraphics} %DIF PREAMBLE
-\DeclareRobustCommand{\DIFdelbeginFL}{\DIFOdelbeginFL \let\includegraphics\DIFdelincludegraphics} %DIF PREAMBLE
-\DeclareRobustCommand{\DIFdelendFL}{\DIFOaddendFL \let\includegraphics\DIFOincludegraphics} %DIF PREAMBLE
 %DIF END PREAMBLE EXTENSION ADDED BY LATEXDIFF
 
 \begin{document}
@@ -260,11 +219,11 @@ Carbon cycle models are subject to the law of mass conservation and therefore ca
 
 To guarantee mass conservation, the matrix $\tens{B}(\vec{C},t)$ is required to be compartmental 
 for all nonnegative $\vec{C}$ and $t>t_0$, i.e., $\tens{B}(\vec{C},t)=(\tens{B}_{ij}(\vec{C},t))_{i,j=1,2,\ldots,d}$ satisfies the properties
-    \begin{enumerate}[(i)]
+     \begin{enumerate} [(i)]
         \item $B_{ii}(\vec{C},t)\leq0$ for all $i$,
         \item $B_{ij}(\vec{C},t)\geq0$ for all $i\neq j$,
         \item $\suml_{i=1}^d B_{ij}(\vec{C},t)\leq0$ for all $j$.
-    \end{enumerate}
+     \end{enumerate} 
 The diagonal values of $B_{ii}$ can be interpreted as the cycling rate of compartment $i$, the off-diagonal entries $B_{ij}$ represent the rate of carbon flux from compartment $j$ to compartment $i$, and $z_j=-\sum_{i=1}^d B_{ij}$ is the rate of carbon leaving the system through pool $j$.
 
     We now assume that we know a unique (numerical) solution $\vec{C}=\vec{C}(t)$ of system \eqref{eqn:CS_td_nonlin}.
@@ -342,11 +301,11 @@ The approach presented above works only when the original model is completely de
         \end{equation}
         where $\gamma(t)$ and $u(t)$ are unknown.
         Further, for discrete times $t_0<t_1<t_2<\cdots<t_n$ we are given
-        \begin{itemize}
+         \begin{itemize} 
             \item the initial system state $C^0$,
             \item $u^k = \intl_{t_k}^{t_{k+1}} u(t)\dd{t},\quad k=0,1,\ldots,n-1$, and
             \item $r^k = \intl_{t_k}^{t_{k+1}} r(t)\dd{t},\quad k=0,1,\ldots,n-1$.
-        \end{itemize}
+         \end{itemize} 
         Here, $u^k$ and $r^k$ denote the accumulated external system input and the accumulated external system output in the time interval $I_k=[t_k,t_{k+1}]$, $k=0,1,\ldots,n-1$, respectively.
 
         We are interested in constructing a compartmental system, as simple as possible, that matches these given data as well as possible.
@@ -406,12 +365,12 @@ The approach presented above works only when the original model is completely de
         \end{equation}
         of which $\tens{B}(t)=(B_{ij}(t))_{i,j=1,2,\ldots,d}$ and $\vec{u}(t)=(u_i(t))_{i=1,2,\ldots,d}$ are unknown.
         But for discrete times $t_0<t_1<t_2<\cdots<t_n$ we are given
-        \begin{itemize}
+         \begin{itemize} 
             \item the initial system content vector $\vec{C}^0=(C^0_1,C^0_2,\ldots,C^0_d)^T$,
             \item $\vec{u}^k = \intl_{t_k}^{t_{k+1}} \vec{u}(t)\dd{t},\quad k=0,1,\ldots,n-1$, 
             \item $\vec{r}^k = \intl_{t_k}^{t_{k+1}} \vec{r}(t)\dd{t},\quad k=0,1,\ldots,n-1$, and
             \item $F_{ij}^k = \intl_{t_k}^{t_{k+1}} B_{ij}(t)\,C_j(t)\dd{t},\quad i\neq j$.
-        \end{itemize}
+         \end{itemize} 
         Here, $\vec{u}^k$ and $\vec{r}^k$ denote the accumulated external system input vector and the accumulated external system output vector in the time interval $I_k=[t_k,t_{k+1}]$, $k=0,1,\ldots,n-1$, respectively.
         Furthermore, $F^k_{ij}$ denotes the accumulated flux from compartment $j$ to compartment $i$ during $I_k$.
 
@@ -472,10 +431,10 @@ The approach presented above works only when the original model is completely de
         \end{aligned}
     \end{equation}
     The discrete-time compartmental matrices $\widehat{\tens{B}}(k)$ satisfy for all $k=0,1,\ldots,n-1$ two conditions
-    \begin{enumerate}[(i)]
+     \begin{enumerate} [(i)]
         \item $\widehat{B}_{ij}(k)\geq0$ for all $i,j=1,2,\ldots,d$, and
         \item $\suml_{i=1}^d \widehat{B}_{ij}(k)\leq 1$ for all $j=1,2,\ldots,d$.
-    \end{enumerate}
+     \end{enumerate} 
     Analogously to the CTA, $\widehat{z}_j(k)=1-\sum_{i=1}^d \widehat{B}_{ij}(k)$ is the rate at which mass at time step $k$ leaves the system through compartment $j$.
     The discrete-time state-transition matrix is, for $0\leq k_1<k_2\leq n$, given by
 
@@ -490,12 +449,12 @@ The approach presented above works only when the original model is completely de
 
     Suppose we are given a $d$-compartment time-dependent linear system with structure \eqref{eqn:CS_multi_dim} and unknown $\tens{B}$ and $\vec{u}$.
     For discrete times $t_0<t_1<t_2<\cdots<t_n$ we are given
-    \begin{itemize}
+     \begin{itemize} 
         \item the initial system content vector $\vec{C}^0=(C^0_1,C^0_2,\ldots,C^0_d)^T$,
         \item $\vec{u}^k = \intl_{t_k}^{t_{k+1}} \vec{u}(t)\dd{t},\quad k=0,1,\ldots,n-1$, 
         \item $\vec{r}^k = \intl_{t_k}^{t_{k+1}} \vec{r}(t)\dd{t},\quad k=0,1,\ldots,n-1$, and
         \item $F_{ij}^k = \intl_{t_k}^{t_{k+1}} B_{ij}(t)\,C_j(t)\dd{t},\quad i\neq j$.
-    \end{itemize}
+     \end{itemize} 
     Here, $\vec{u}^k$ and $\vec{r}^k$ denote the accumulated external system input vector and the accumulated external system output vector in the time interval $I_k=[t_k,t_{k+1}]$, $k=0,1,\ldots,n-1$, respectively.
     Furthermore, $F^k_{ij}$ denotes the accumulated flux from compartment $j$ to compartment $i$ during $I_k$.
 
@@ -555,7 +514,7 @@ We first give two examples with simplified systems (i.e., one- and two-compartme
         C(1909) &= 40.
     \end{aligned}
 \end{equation}
-The CTA approach exactly matches the system analytical solution despite the relatively small number of data points available for the reconstruction, $n=3,6$ (Figure \ref{fig:CS_one_dim_example_auton}).
+The CTA approach exactly matches the system\DIFaddbegin \DIFadd{'s }\DIFaddend analytical solution despite the relatively small number of data points available for the reconstruction, $n=3,6$ (Figure \ref{fig:CS_one_dim_example_auton}).
 
 \begin{figure}[htbp]
     \centering 
@@ -572,11 +531,16 @@ Consider the one compartment system with time-dependent inputs beginning in year
 \DIFaddbegin 
 
 \DIFaddend \begin{equation}\label{eqn:CS_one_dim_example}
-    \begin{aligned}
-        \deriv{t}\,C(t) &= -0.04\,C(t) + \left[3+\sin(t/20)\right],\quad t>1909,\\
-        C(1909) &= 40.
+    \DIFdelbegin %DIFDELCMD < \begin{aligned}
+%DIFDELCMD <         \deriv{t}\,C(t) &= -0.04\,C(t) + \left[3+\sin(t/20)\right],\quad t>1909,\\
+%DIFDELCMD <         C(1909) &= 40.
+%DIFDELCMD <     \end{aligned}
+%DIFDELCMD < %%%
+\DIFdelend \DIFaddbegin \begin{aligned}
+        \deriv{t}\,C(t) &= -0.04\,C(t) + \left[3+\sin(t/20)\right],\quad t>1919,\\
+        C(1919) &= 40.
     \end{aligned}
-\end{equation}
+\DIFaddend \end{equation}
  The CTA improves with increasing number $n$ of data points used in the approximation (Figure \ref{fig:CS_one_dim_example}).
  For small number of data points, the CTA can miss important dynamics occurring inside the time step. For instance, for the reconstruction using time steps of 30 years, the convexity of the curve is completely different between the original model and the reconstruction. Therefore, care must be taken in using the CTA when important changes in dynamics occur inside the time step. 
 
@@ -584,7 +548,7 @@ Consider the one compartment system with time-dependent inputs beginning in year
     \centering 
     \includegraphics[width=1.0\linewidth]{figs/interpol_pwc_1.pdf}
     \caption{Transient C stocks of the one-compartment system with time-dependent inputs reconstructed by CTA for different data time steps $\Delta t$.
-    Mean annual absolute bias is $\SI{3.92}{\percent}$, $\SI{0.92}{\percent}$, and $\SI{0.46}{\percent}$ for $\Delta{t} = \SI{30}{\yr}$, $\SI{20}{\yr}$, and $\SI{10}{\yr}$, respectively.
+    Mean annual absolute bias is $\SI{3.92}{\percent}$, \DIFdelbeginFL \DIFdelFL{$\SI{0.92}{\percent}$}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{$\SI{0.96}{\percent}$}\DIFaddendFL , and \DIFdelbeginFL \DIFdelFL{$\SI{0.46}{\percent}$ }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{$\SI{0.43}{\percent}$ }\DIFaddendFL for $\Delta{t} = \SI{30}{\yr}$, $\SI{20}{\yr}$, and $\SI{10}{\yr}$, respectively.
     The solid black line represents the carbon content of the original system \eqref{eqn:CS_one_dim_example}, the dashed lines represent the carbon contents of the CTAs with different time steps.}    
     \label{fig:CS_one_dim_example}
 \end{figure}        
@@ -610,7 +574,7 @@ Consider the one compartment system with time-dependent inputs beginning in year
     \end{equation}
     where $\gamma_1(t)=0.1+0.05\,\sin(0.1\,t)$, $\gamma_2=0.05$.
 
-     In this case, data from the original model extracted at 5 y time steps leads to a very accurate CTA, whereas coarser temporal time steps lead to progressively worse approximations (Figure \ref{fig:CS_two_dim_example}).
+     In this case, data from the original model extracted at 5 \DIFdelbegin \DIFdel{y }\DIFdelend \DIFaddbegin \DIFadd{yr }\DIFaddend time steps leads to a very accurate CTA, whereas coarser temporal time steps lead to progressively worse approximations (Figure \ref{fig:CS_two_dim_example}).
     \begin{figure}[htbp]
         \centering 
         \includegraphics[width=1.0\linewidth]{figs/interpol_pwc_2.pdf}
@@ -725,7 +689,10 @@ Radiocarbon is a valuable tracer to evaluate, understand, and improve soil carbo
 .
 }\DIFaddend %\section*{Acknowledgements}
 \acknowledgments
-Funding was provided by the Max Planck Society and the German Research Foundation through its Emmy Noether Program (SI 1953/2--1). A.M.H. received funding from the European Research Council (ERC) under the European Union’s Horizon 2020 research and innovation programme (grant agreement No. 695101 (14Constraint)). WJR and QZ were funded by the Director, Office of Science, Office of Biological and Environmental Research of the US Department of Energy under Contract No. DE-AC02-05CH11231 as part of the Regional and Global Climate Modeling (RGCM), RUBISCO SFA, and the E3SM project.
+Funding was provided by the Max Planck Society and the German Research Foundation through its Emmy Noether Program (SI 1953/2--1). A.M.H. received funding from the European Research Council (ERC) under the European Union’s Horizon 2020 research and innovation programme (grant agreement No. 695101 (14Constraint)). WJR and QZ were funded by the Director, Office of Science, Office of Biological and Environmental Research of the US Department of Energy under Contract No. DE-AC02-05CH11231 as part of the Regional and Global Climate Modeling (RGCM), RUBISCO SFA, and the E3SM project\DIFaddbegin \DIFadd{.
+}
+
+\DIFadd{All code required to reproduce the results presented in this manuscript has been permanently archived at }\url{DOI: 10.5281/zenodo.3520048}\DIFaddend .
 
 %\bibliographystyle{apalike}
 %\bibliographystyle{gcb}
