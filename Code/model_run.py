@@ -123,7 +123,7 @@ class ModelRun(object):
         return mr_pwc
 
     @classmethod
-    def reconstruct_B_surrogate(cls, dt, x0, F, r, u, B0):
+    def reconstruct_B_surrogate(cls, dt, x0, F, r, u, B0, x1):
         ## reconstruct a B that meets F and r possibly well,
         ## B0 is some initial guess for the optimization
         nr_pools = len(x0)
@@ -136,8 +136,8 @@ class ModelRun(object):
                 x = M @ x0 + pinv(B) @ (-np.identity(nr_pools)+M) @ u
                 return x
     
-            xs = np.array(list(map(x, tr_times)))
-            return np.trapz(xs, tr_times, axis=0)
+            xs, x1 = np.array(list(map(x, tr_times))), x(tr_times[-1])
+            return np.trapz(xs, tr_times, axis=0), x1
     
         ## convert parameter vector to compartmental matrix
         def pars_to_matrix(pars):
@@ -155,8 +155,12 @@ class ModelRun(object):
         def g_tr(pars):
             B = pars_to_matrix(pars)
             tr_times = np.linspace(0, dt, 11)
-            int_x = x_trapz(tr_times, B)
-    
+
+            res0 = 0
+            ## keep the next two lines if next x-value is also a constraint
+            int_x, x1_tmp = x_trapz(tr_times, B)
+            res0 = np.max(np.abs(x1_tmp-x1))
+ 
             res1_int = F.reshape((nr_pools**2,))[int_indices.tolist()]
             res2_int = pars[:len(int_indices)] * int_x[(int_indices % nr_pools).tolist()]
             res_int = np.abs(res1_int-res2_int)
@@ -168,7 +172,7 @@ class ModelRun(object):
             res = np.append(res_int, res_ext)
 #            print(pars, res1_int, res2_int, res1_ext, res2_ext, res)
     
-            return res
+            return res0 + res
     
         ## wrapper around g_tr that keeps parameter within boundaries
         def constrainedFunction(x, f, lower, upper, minIncr=0.001):
@@ -250,7 +254,7 @@ class ModelRun(object):
             dt = data_times[k+1] - data_times[k]
             #dt = dt.item().days ##### to be removed or made safe
             B0 = guess_B0(dt, (xs[k]+xs[k+1])/2, Fs[k], rs[k])
-            B = cls.reconstruct_B_surrogate(dt, x, Fs[k], rs[k], us[k], B0)
+            B = cls.reconstruct_B_surrogate(dt, x, Fs[k], rs[k], us[k], B0, xs[k+1])
             M = expm(dt*B)
             x = M @ x + inv(B) @ (-np.identity(nr_pools)+M) @ us[k]
     

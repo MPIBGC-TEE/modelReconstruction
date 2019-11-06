@@ -137,9 +137,13 @@ def plot_approximations_n_axes(smr, nr_data_points_list, figsize, filename):
         ## plot solution
 
         ax = fig.add_subplot(nr_axes, 1, nr+1)
-        ax.set_title(r'$n=%d$ data points' % nr_data_points, 
-                     pad = 20,
-                    )
+        title = r'$n=%d$ data points' % nr_data_points
+        ax.set_title(
+            label = title,
+            fontdict = None,
+            loc = 'center',      
+            pad = 20
+        )
 
         if nr_pools == 1:
             colors = ['red', 'blue', 'olive', 'black']
